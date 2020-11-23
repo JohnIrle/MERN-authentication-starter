@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "A starter for authentication in a full stack MERN application",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "start": "node backend/server",
-    "server": "nodemon backend/server"
+    "server": "nodemon backend/server",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
