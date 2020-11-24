@@ -27,8 +27,6 @@ const userInfoFromStorage: AuthenticationPayload = localStorage.getItem(
 const initialState = {
   userLogin: {
     userInfo: userInfoFromStorage,
-    error: undefined,
-    loading: undefined,
   },
 };
 

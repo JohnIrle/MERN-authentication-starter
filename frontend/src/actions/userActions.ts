@@ -93,7 +93,7 @@ export const getUserDetails = (id: string): AppThunk => async (
     const config = {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${userInfo!.token}`,
+        Authorization: userInfo && `Bearer ${userInfo.token}`,
       },
     };
 
@@ -129,7 +129,7 @@ export const updateUserProfile = (
     const config = {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${userInfo!.token}`,
+        Authorization: userInfo && `Bearer ${userInfo.token}`,
       },
     };
 

@@ -1,4 +1,3 @@
-import { Reducer, Action } from "redux";
 import {
   UserLoginTypes,
   USER_LOGIN_REQUEST,
@@ -21,44 +20,43 @@ import {
   ErrorPayload,
 } from "../types/userTypes";
 
-export interface LoginState {
-  userInfo: AuthenticationPayload | undefined;
-  loading: boolean | undefined;
-  error: ErrorPayload | undefined;
+export interface AuthenticationState {
+  userInfo?: AuthenticationPayload;
+  loading?: boolean;
+  error?: ErrorPayload;
 }
 
-const initialState: LoginState = {
-  userInfo: undefined,
-  loading: false,
-  error: undefined,
-};
+const initialState: AuthenticationState = {};
 
 export const userLoginReducer = (
   state = initialState,
   action: UserLoginTypes
-): LoginState => {
+): AuthenticationState => {
   switch (action.type) {
     case USER_LOGIN_REQUEST:
-      return { loading: true, userInfo: undefined, error: undefined };
+      return { loading: true };
     case USER_LOGIN_SUCCESS:
-      return { loading: false, userInfo: action.payload, error: undefined };
+      return { loading: false, userInfo: action.payload };
     case USER_LOGIN_FAIL:
-      return { loading: true, error: action.payload, userInfo: undefined };
+      return { loading: true, error: action.payload };
     case USER_LOGOUT:
-      return { loading: undefined, error: undefined, userInfo: undefined };
+      return {};
     default:
       return state;
   }
 };
 
-export const userRegisterReducer = (state = {}, action: UserRegisterTypes) => {
+export const userRegisterReducer = (
+  state = initialState,
+  action: UserRegisterTypes
+): AuthenticationState => {
   switch (action.type) {
     case USER_REGISTER_REQUEST:
       return { loading: true };
     case USER_REGISTER_SUCCESS:
       return { loading: false, userInfo: action.payload };
     case USER_REGISTER_FAIL:
-      return { loading: true, payload: action.payload };
+      return { loading: true, error: action.payload };
     default:
       return state;
   }
