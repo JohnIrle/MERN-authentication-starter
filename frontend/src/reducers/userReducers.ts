@@ -1,3 +1,4 @@
+import { Reducer, Action } from "redux";
 import {
   UserLoginTypes,
   USER_LOGIN_REQUEST,
@@ -16,18 +17,35 @@ import {
   USER_UPDATEPROFILE_REQUEST,
   USER_UPDATEPROFILE_SUCCESS,
   USER_UPDATEPROFILE_FAIL,
+  AuthenticationPayload,
+  ErrorPayload,
 } from "../types/userTypes";
 
-export const userLoginReducer = (state = {}, action: UserLoginTypes) => {
+export interface LoginState {
+  userInfo: AuthenticationPayload | undefined;
+  loading: boolean | undefined;
+  error: ErrorPayload | undefined;
+}
+
+const initialState: LoginState = {
+  userInfo: undefined,
+  loading: false,
+  error: undefined,
+};
+
+export const userLoginReducer = (
+  state = initialState,
+  action: UserLoginTypes
+): LoginState => {
   switch (action.type) {
     case USER_LOGIN_REQUEST:
-      return { loading: true };
+      return { loading: true, userInfo: undefined, error: undefined };
     case USER_LOGIN_SUCCESS:
-      return { loading: false, userInfo: action.payload };
+      return { loading: false, userInfo: action.payload, error: undefined };
     case USER_LOGIN_FAIL:
-      return { loading: true, payload: action.payload };
+      return { loading: true, error: action.payload, userInfo: undefined };
     case USER_LOGOUT:
-      return {};
+      return { loading: undefined, error: undefined, userInfo: undefined };
     default:
       return state;
   }

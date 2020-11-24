@@ -3,7 +3,7 @@ export const USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS";
 export const USER_LOGIN_FAIL = "USER_LOGIN_FAIL";
 export const USER_LOGOUT = "USER_LOGOUT";
 
-export type UserPayload = {
+export type AuthenticationPayload = {
   _id: string;
   name: string;
   email: string;
@@ -11,7 +11,7 @@ export type UserPayload = {
   token: string;
 };
 
-export type UserError = {
+export type ErrorPayload = {
   message: string;
 };
 
@@ -20,11 +20,11 @@ export interface UserLoginRequest {
 }
 export interface UserLoginSuccess {
   type: typeof USER_LOGIN_SUCCESS;
-  payload: UserPayload;
+  payload: AuthenticationPayload;
 }
 export interface UserLoginFail {
   type: typeof USER_LOGIN_FAIL;
-  payload: UserError;
+  payload: ErrorPayload;
 }
 export interface UserLogout {
   type: typeof USER_LOGOUT;
@@ -44,11 +44,11 @@ export interface UserRegisterRequest {
 }
 export interface UserRegisterSuccess {
   type: typeof USER_REGISTER_SUCCESS;
-  payload: UserPayload;
+  payload: AuthenticationPayload;
 }
 export interface UserRegisterFail {
   type: typeof USER_REGISTER_FAIL;
-  payload: UserError;
+  payload: ErrorPayload;
 }
 export type UserRegisterTypes =
   | UserRegisterRequest
@@ -58,7 +58,7 @@ export type UserRegisterTypes =
 export const USER_DETAILS_REQUEST = "USER_DETAILS_REQUEST";
 export const USER_DETAILS_SUCCESS = "USER_DETAILS_SUCCESS";
 export const USER_DETAILS_FAIL = "USER_DETAILS_FAIL";
-export type UserDetailsPayload = {
+export type ProfilePayload = {
   _id: string;
   name: string;
   email: string;
@@ -71,11 +71,11 @@ export interface UserDetailsRequest {
 }
 export interface UserDetailsSuccess {
   type: typeof USER_DETAILS_SUCCESS;
-  payload: UserDetailsPayload;
+  payload: ProfilePayload;
 }
 export interface UserDetailsFail {
   type: typeof USER_DETAILS_FAIL;
-  payload: UserError;
+  payload: ErrorPayload;
 }
 export type UserDetailsTypes =
   | UserDetailsRequest
@@ -91,11 +91,11 @@ export interface UserUpdateProfileRequest {
 }
 export interface UserUpdateProfileSuccess {
   type: typeof USER_UPDATEPROFILE_SUCCESS;
-  payload: UserDetailsPayload;
+  payload: ProfilePayload;
 }
 export interface UserUpdateProfileFail {
   type: typeof USER_UPDATEPROFILE_FAIL;
-  payload: UserError;
+  payload: ErrorPayload;
 }
 export type UserUpdateDetailsTypes =
   | UserUpdateProfileRequest

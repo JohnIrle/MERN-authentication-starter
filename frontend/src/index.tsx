@@ -4,6 +4,7 @@ import "./index.css";
 import { Provider } from "react-redux";
 import store from "./store";
 import App from "./App";
+import "../node_modules/bulma/css/bulma.css";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
