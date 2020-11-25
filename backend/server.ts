@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Application, Request, Response } from "express";
 import dotenv from "dotenv";
 import colors from "colors";
 import {
@@ -12,11 +12,11 @@ dotenv.config();
 
 connectDB();
 
-const app = express();
+const app: Application = express();
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
+app.get("/", (req: Request, res: Response) => {
   res.send("API is running...");
 });
 
@@ -27,8 +27,7 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5001;
 
-app.listen(
-  5001,
+app.listen(5001, () =>
   console.log(
     `Server running in ${process.env.NODE_ENV} on port ${PORT}`.yellow.bold
   )

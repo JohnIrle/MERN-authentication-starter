@@ -139,6 +139,8 @@ export const updateUserProfile = (
       type: USER_UPDATEPROFILE_SUCCESS,
       payload: data,
     });
+
+    localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_UPDATEPROFILE_FAIL,

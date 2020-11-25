@@ -18,6 +18,7 @@ import {
   USER_UPDATEPROFILE_FAIL,
   AuthenticationPayload,
   ErrorPayload,
+  USER_UPDATEPROFILE_RESET,
 } from "../types/userTypes";
 
 export interface AuthenticationState {
@@ -62,30 +63,48 @@ export const userRegisterReducer = (
   }
 };
 
-export const userDetailsReducer = (state = {}, action: UserDetailsTypes) => {
+export interface UserDetailsState {
+  user?: AuthenticationPayload;
+  loading?: boolean;
+  error?: ErrorPayload;
+}
+
+export const userDetailsReducer = (
+  state = {},
+  action: UserDetailsTypes
+): UserDetailsState => {
   switch (action.type) {
     case USER_DETAILS_REQUEST:
       return { loading: true };
     case USER_DETAILS_SUCCESS:
-      return { loading: false, userInfo: action.payload };
+      return { loading: false, user: action.payload };
     case USER_DETAILS_FAIL:
-      return { loading: true, payload: action.payload };
+      return { loading: true, error: action.payload };
     default:
       return state;
   }
 };
 
+export interface UpdateProfileState {
+  userInfo?: AuthenticationPayload;
+  loading?: boolean;
+  error?: ErrorPayload;
+  success?: boolean;
+}
+
 export const userUpdateProfileReducer = (
   state = {},
   action: UserUpdateDetailsTypes
-) => {
+): UpdateProfileState => {
   switch (action.type) {
     case USER_UPDATEPROFILE_REQUEST:
       return { loading: true };
     case USER_UPDATEPROFILE_SUCCESS:
-      return { loading: false, userInfo: action.payload };
+      return { loading: false, success: true, userInfo: action.payload };
     case USER_UPDATEPROFILE_FAIL:
-      return { loading: true, payload: action.payload };
+      return { loading: true, error: action.payload };
+    case USER_UPDATEPROFILE_RESET:
+      return {};
     default:
       return state;
   }

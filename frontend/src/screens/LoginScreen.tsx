@@ -16,7 +16,7 @@ const LoginScreen: React.FC<RouteComponentProps> = ({ history }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (userLogin.userInfo) {
+    if (userInfo) {
       history.push("/");
     }
   }, [history, userInfo]);

@@ -7,8 +7,9 @@ export type AuthenticationPayload = {
   _id: string;
   name: string;
   email: string;
-  isAdmin: boolean;
-  token: string;
+  isAdmin?: boolean;
+  token?: string;
+  password?: string;
 };
 
 export type ErrorPayload = {
@@ -85,6 +86,7 @@ export type UserDetailsTypes =
 export const USER_UPDATEPROFILE_REQUEST = "USER_UPDATEPROFILE_REQUEST";
 export const USER_UPDATEPROFILE_SUCCESS = "USER_UPDATEPROFILE_SUCCESS";
 export const USER_UPDATEPROFILE_FAIL = "USER_UPDATEPROFILE_FAIL";
+export const USER_UPDATEPROFILE_RESET = "USER_UPDATEPROFILE_RESET";
 
 export interface UserUpdateProfileRequest {
   type: typeof USER_UPDATEPROFILE_REQUEST;
@@ -97,7 +99,12 @@ export interface UserUpdateProfileFail {
   type: typeof USER_UPDATEPROFILE_FAIL;
   payload: ErrorPayload;
 }
+export interface UserUpdateProfileReset {
+  type: typeof USER_UPDATEPROFILE_RESET;
+}
+
 export type UserUpdateDetailsTypes =
   | UserUpdateProfileRequest
   | UserUpdateProfileSuccess
+  | UserUpdateProfileReset
   | UserUpdateProfileFail;
