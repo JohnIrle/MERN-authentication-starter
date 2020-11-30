@@ -19,13 +19,17 @@ A starter for authentication in a full stack MERN application
 - [ ] List Users
 
 ### Server
-- [ ] Add TypeScript to Server
+- [x] Add TypeScript to Server
   - [x] ts-node, @types/node, @types/express typscript
   - [x] start: node backend/dist/server.js
   - [x] dev: nodemon backend/server.ts
-  - [ ] build: tsc -p
+  - [x] build: tsc -p
   - [x] tsc --init
   - [x] target es6
   - [x] outDir ./backend/dist
   - [x] rootDir ./backend
   - [x] moduleResolution node
+
+## Possible Bugs
+- [ ] Update Profile making new user instead of updating
+

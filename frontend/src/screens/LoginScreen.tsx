@@ -4,6 +4,7 @@ import { RouteComponentProps } from "react-router-dom";
 import Message from "../components/Message";
 import { RootStore } from "../store";
 import { login } from "../actions/userActions";
+import { CLEAR_ERRORS } from "../types/userTypes";
 
 const LoginScreen: React.FC<RouteComponentProps> = ({ history }) => {
   const [email, setEmail] = useState("");
@@ -21,6 +22,10 @@ const LoginScreen: React.FC<RouteComponentProps> = ({ history }) => {
     }
   }, [history, userInfo]);
 
+  const closeError = () => {
+    dispatch({ type: CLEAR_ERRORS });
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(login(email, password));
@@ -32,7 +37,11 @@ const LoginScreen: React.FC<RouteComponentProps> = ({ history }) => {
         <div className="columns is-centered">
           <div className="column is-half">
             <form className="notification is-light" onSubmit={handleSubmit}>
-              {error && <Message variant="is-danger">error</Message>}
+              {error && (
+                <Message variant="is-danger" onClose={closeError}>
+                  {error}
+                </Message>
+              )}
               <div className="field">
                 <label className="label">Email</label>
                 <div className="control">

@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import RegisterScreen from "./screens/RegisterScreen";
 import LoginScreen from "./screens/LoginScreen";
 import ProfileScreen from "./screens/ProfileScreen";
+import UserListScreen from "./screens/UserListScreen";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/register" component={RegisterScreen} />
           <Route path="/login" component={LoginScreen} />
           <Route path="/profile" component={ProfileScreen} />
+          <Route path="/admin/userList" component={UserListScreen} />
         </div>
       </main>
     </Router>

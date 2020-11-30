@@ -1,6 +1,6 @@
 import asyncHandler from "express-async-handler";
-import User from "../models/userModel.js";
-import generateToken from "../utils/generateToken.js";
+import User, { IUser } from "../models/userModel";
+import generateToken from "../utils/generateToken";
 
 // @desc   Auth user & get token
 // @route  POST /api/users/login
@@ -10,7 +10,7 @@ const authUser = asyncHandler(async (req, res) => {
 
   const user = await User.findOne({ email });
 
-  if (user && (await user.matchPassword(password))) {
+  if (user && (await user.matchPassword!(password))) {
     res.json({
       _id: user._id,
       name: user.name,
@@ -34,7 +34,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   if (userExists) {
     res.status(400);
-    throw new Error("User alread exists");
+    throw new Error("User already exists");
   }
 
   const user = await User.create({
@@ -60,7 +60,7 @@ const registerUser = asyncHandler(async (req, res) => {
 // @desc   Get user profile
 // @route  GET /api/users/profile
 // @access Private
-const getUserProfile = asyncHandler(async (req, res) => {
+const getUserProfile = asyncHandler(async (req: any, res) => {
   const user = await User.findOne(req.user._id);
 
   if (user) {
@@ -79,7 +79,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
 // @desc   Update user profile
 // @route  PUT /api/users/profile
 // @access Private
-const updateUserProfile = asyncHandler(async (req, res) => {
+const updateUserProfile = asyncHandler(async (req: any, res) => {
   const user = await User.findOne(req.user._id);
 
   if (user) {
@@ -103,4 +103,13 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser, registerUser, getUserProfile, updateUserProfile };
+// @desc   Get all users
+// @route  GET /api/users
+// @access Private/Admin
+const getUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({});
+
+  res.json(users);
+});
+
+export { authUser, registerUser, getUserProfile, updateUserProfile, getUsers };

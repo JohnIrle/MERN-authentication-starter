@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node backend/dist/server.js",
     "server": "nodemon backend/server.ts",
+    "build": "tsc -p .",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "2.4.2",
+    "@types/colors": "1.2.1",
     "@types/express": "4.17.9",
     "@types/jsonwebtoken": "8.5.0",
     "@types/mongoose": "5.10.1",

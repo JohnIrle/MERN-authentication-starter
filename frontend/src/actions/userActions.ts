@@ -20,6 +20,10 @@ import {
   USER_UPDATEPROFILE_FAIL,
   USER_LOGOUT,
   AuthenticationPayload,
+  UserListTypes,
+  USER_LIST_REQUEST,
+  USER_LIST_SUCCESS,
+  USER_LIST_FAIL,
 } from "../types/userTypes";
 
 export const login = (email: string, password: string): AppThunk => async (
@@ -144,6 +148,43 @@ export const updateUserProfile = (
   } catch (error) {
     dispatch({
       type: USER_UPDATEPROFILE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const listUsers = (): AppThunk => async (
+  dispatch: Dispatch<UserListTypes>,
+  getState
+) => {
+  try {
+    dispatch({
+      type: USER_LIST_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: userInfo && `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/api/users`, config);
+
+    dispatch({
+      type: USER_LIST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: USER_LIST_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

@@ -4,6 +4,7 @@ import {
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAIL,
   USER_LOGOUT,
+  CLEAR_ERRORS,
   UserRegisterTypes,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
@@ -19,6 +20,11 @@ import {
   AuthenticationPayload,
   ErrorPayload,
   USER_UPDATEPROFILE_RESET,
+  UserListTypes,
+  USER_LIST_REQUEST,
+  USER_LIST_SUCCESS,
+  USER_LIST_FAIL,
+  USER_LIST_RESET,
 } from "../types/userTypes";
 
 export interface AuthenticationState {
@@ -42,6 +48,8 @@ export const userLoginReducer = (
       return { loading: true, error: action.payload };
     case USER_LOGOUT:
       return {};
+    case CLEAR_ERRORS:
+      return { ...state, error: undefined };
     default:
       return state;
   }
@@ -105,6 +113,34 @@ export const userUpdateProfileReducer = (
       return { loading: true, error: action.payload };
     case USER_UPDATEPROFILE_RESET:
       return {};
+    default:
+      return state;
+  }
+};
+
+export interface UserListState {
+  usersList?: AuthenticationPayload[];
+  loading?: boolean;
+  error?: ErrorPayload;
+}
+
+const initialListState = {};
+
+export const userListReducer = (
+  state = initialListState,
+  action: UserListTypes
+): UserListState => {
+  switch (action.type) {
+    case USER_LIST_REQUEST:
+      return { loading: true };
+    case USER_LIST_SUCCESS:
+      return { loading: false, usersList: action.payload };
+    case USER_LIST_FAIL:
+      return { loading: true, error: action.payload };
+    case USER_LIST_RESET:
+      return {
+        usersList: [],
+      };
     default:
       return state;
   }

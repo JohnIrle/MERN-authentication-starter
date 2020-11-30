@@ -2,6 +2,7 @@ export const USER_LOGIN_REQUEST = "USER_LOGIN_REQUEST";
 export const USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS";
 export const USER_LOGIN_FAIL = "USER_LOGIN_FAIL";
 export const USER_LOGOUT = "USER_LOGOUT";
+export const CLEAR_ERRORS = "CLEAR_ERRORS";
 
 export type AuthenticationPayload = {
   _id: string;
@@ -13,7 +14,7 @@ export type AuthenticationPayload = {
 };
 
 export type ErrorPayload = {
-  message: string;
+  message: string | null;
 };
 
 export interface UserLoginRequest {
@@ -30,11 +31,15 @@ export interface UserLoginFail {
 export interface UserLogout {
   type: typeof USER_LOGOUT;
 }
+export interface ClearErrors {
+  type: typeof CLEAR_ERRORS;
+}
 export type UserLoginTypes =
   | UserLoginRequest
   | UserLoginSuccess
   | UserLoginFail
-  | UserLogout;
+  | UserLogout
+  | ClearErrors;
 
 export const USER_REGISTER_REQUEST = "USER_REGISTER_REQUEST";
 export const USER_REGISTER_SUCCESS = "USER_REGISTER_SUCCESS";
@@ -108,3 +113,29 @@ export type UserUpdateDetailsTypes =
   | UserUpdateProfileSuccess
   | UserUpdateProfileReset
   | UserUpdateProfileFail;
+
+export const USER_LIST_REQUEST = "USER_LIST_REQUEST";
+export const USER_LIST_SUCCESS = "USER_LIST_SUCCESS";
+export const USER_LIST_FAIL = "USER_LIST_FAIL";
+export const USER_LIST_RESET = "USER_LIST_RESET";
+
+export interface UserListRequest {
+  type: typeof USER_LIST_REQUEST;
+}
+export interface UserListSuccess {
+  type: typeof USER_LIST_SUCCESS;
+  payload: AuthenticationPayload[];
+}
+export interface UserListFail {
+  type: typeof USER_LIST_FAIL;
+  payload: ErrorPayload;
+}
+export interface UserListReset {
+  type: typeof USER_LIST_RESET;
+}
+
+export type UserListTypes =
+  | UserListRequest
+  | UserListSuccess
+  | UserListFail
+  | UserListReset;

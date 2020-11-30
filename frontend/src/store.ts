@@ -8,6 +8,7 @@ import {
   userRegisterReducer,
   userDetailsReducer,
   userUpdateProfileReducer,
+  userListReducer,
 } from "./reducers/userReducers";
 import { AuthenticationPayload } from "./types/userTypes";
 
@@ -16,6 +17,7 @@ const reducer = combineReducers({
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
+  userList: userListReducer,
 });
 
 const userInfoFromStorage: AuthenticationPayload = localStorage.getItem(
